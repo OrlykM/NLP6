@@ -11,7 +11,8 @@ def validate_api_key(api_key):
 def generate_answer_gradio(api_key, query, method, rerank, assistant_generate_answer):
     if not api_key:
         return "No API key provided.", ""
-    return assistant_generate_answer(api_key, query, method, rerank)
+    resp1, resp2 = assistant_generate_answer(api_key, query, method, rerank)
+    return resp1, " ".join(i for i in resp2)
 
 
 def populate_query(example):
@@ -33,7 +34,7 @@ def create_ui(assistant_generate_answer):
             interactive=False  
         )
         method_input = gr.Radio(
-            choices=['BM25', 'Full', 'Rag'],
+            choices=['BM25', 'Full', 'Semantic'],
             label="Choose Method",
             value='BM25'
         )
