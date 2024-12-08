@@ -64,7 +64,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--use_pdf",
-        action='store_true',
+        action=False,
         help="Generate embeddings from the PDF data instead of loading an existing FAISS index."
     )
     args = parser.parse_args()
