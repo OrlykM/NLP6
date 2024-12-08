@@ -3,7 +3,7 @@
 
 **Формат даних** - PDF, CSV
 
-**Data source** - зібрані pdf файли із різних наукових журналів  (https://github.com/OrlykM/NLP6) - Відповідальний Максим Орлянський & Френіс Володимир
+**Data source** - зібрані pdf файли із різних наукових журналів  (https://github.com/OrlykM/NLP6/tree/master/NLP6) - Відповідальний Максим Орлянський & Френіс Володимир
 
 **Chunking** - langchain, RecursiveCharacterTextSplitter (описаний у файлах preprocessor.py, pdf_data_preprocessor.py) - Відповідальний Френіс Володимир
 
