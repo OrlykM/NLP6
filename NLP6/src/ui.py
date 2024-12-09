@@ -20,6 +20,12 @@ def populate_query(example):
 
 def create_ui(assistant_generate_answer):
     with gr.Blocks() as interface:
+        gr.Markdown("""
+        **Ця система призначена для отримання відповідей на запитання, пов'язані з науковими статтями на тему візуальної одометрії.**  
+        У системі є 15 наукових статей, збережених у форматі CSV та 15 відповідних PDF-файлів.  
+        Ви можете вводити запити або натиснути на кнопку для надсилання вже готового питання, для отримання інформації з цих статей.
+        """)
+
         api_key_input = gr.Textbox(
             label="Enter your API KEY for GROQ",
             placeholder="Your API KEY",
@@ -29,7 +35,7 @@ def create_ui(assistant_generate_answer):
         
         example_queries = ["What is doi number of \"Comprehensive Performance Evaluation between Visual SLAM and LiDAR SLAM for Mobile Robots: Theories and Experiments\" ?",
                            "How many and who are the authors of the article \"LIO-SAM: Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping\"", "According to article \"Direct Sparse Odometry\" when Vladlen Koltun received his PhD",
-                           "How called article from authors Moreno-Noguer, Lepetit, and Fua from reference 79 for the article \" Visual Odometry \"", "Return all articles names which have more than 100 references "]
+                           "Write me something about SLAM and VSLAM. Write a difference beetween it", "Abbreviations in article \" An Overview on Visual SLAM: From Tradition to Semantic\""]
         example_buttons = [
             gr.Button(example, size="sm") for example in example_queries
         ]
