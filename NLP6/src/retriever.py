@@ -27,7 +27,7 @@ class TextRetriever:
         
     def retrieve_with_semantic(self, query, top_n=3, rerank=True):
         query_embedding = self.model.encode([query], normalize_embeddings=True)  
-        D, I = self.index.search(query_embedding, k=40)  
+        D, I = self.index.search(query_embedding, k=10)  
     
         initial_results = [
             (self.chunk_references[i], self.chunks[i][0], self.chunks[i][1], D[0][j])
