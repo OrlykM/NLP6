@@ -25,7 +25,6 @@ def create_ui(assistant_generate_answer):
         У системі є 15 наукових статей, збережених у форматі CSV та 15 відповідних PDF-файлів.  
         Ви можете вводити запити або натиснути на кнопку для надсилання вже готового питання, для отримання інформації з цих статей.
 
-        API_KEY: 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
         """)
 
         api_key_input = gr.Textbox(
