@@ -1,35 +1,46 @@
-#### Summary
-**Тематика роботи**- RAG на тематику наукових статей для візуальної одометрії - Відповідальний Максим Орлянський & Френіс Володимир
+## **Задача**  
+Розробка Retrieval-Augmented Generation (RAG) системи для роботи з PDF-документами, пов’язаними з науковими статтями на тему візуальної одометрії.
 
-**Формат даних** - PDF, CSV
+---
 
-**Data source** - зібрані pdf файли із різних наукових журналів  (https://github.com/OrlykM/NLP6/tree/master/NLP6) - Відповідальний Максим Орлянський & Френіс Володимир
+## **Опис компонентів**  
 
-**Chunking** - langchain, RecursiveCharacterTextSplitter (описаний у файлах preprocessor.py, pdf_data_preprocessor.py) - Відповідальний Френіс Володимир
+- **Data source**  
+  PDF-документи (15 штук) зі статтями з наукових журналів. Перед обробкою PDF-документів застосовано лематизацію, щоб звести слова до їх базових форм
 
-**LLM** - groq/llama-8b-8192 - Відповідальний Максим Орлянський & Френіс Володимир
+- **Chunking**  
+  Використано метод RecursiveCharacterTextSplitter з LangChain для розбиття тексту на частини по 2048 символів із перекриттям у 200 символів.  
 
-**Retriver** - присутні усі (
-Sparse BM25 - TF-IDF,  - Відповідальний  Френіс Володимир
-Dense - intfloat/e5-large-v2, - Відповідальний  Максим Орлянський & Френіс Володимир
-Hybrid-Full - Reranker(BM25+Dense))  Відповідальний Максим Орлянський
+- **LLM**  
+  Використано модель **groq/llama-8b-8192**.  
 
-**Reranking** - присутній, BAAI/bge-reranker-large - Відповідальний  Френіс Володимир
+- **Retriever**  
+  Розроблено три методи:  
+  1. **BM25** — повертає 3 релевантні документи.  
+  2. **Semantic** (на основі **intfloat/e5-large-v2**) — повертає 40 найбільш релевантних документів.  
+  3. **FULL search** — комбінує BM25, Semantic + Reranker. Після об’єднання 6 документів (3 від BM25, 3 від Semantic + Reranker), Reranker обирає 3 з них.  
 
-**Citations** - присутнє - Відповідальний  Френіс Володимир
+- **Reranker**  
+  Використано модель **BAAI/bge-reranker-large**.  
 
-**UI** - Gradio - Відповідальний Максим Орлянський
+- **Citations**  
+  Система повертає назву документа та номер чанка, з якого отримано інформацію.  
 
-**Metadata filtering** - "N/A"
+- **UI**  
+  Інтерфейс реалізовано за допомогою **Gradio**.  
 
-**Source code** - https://github.com/OrlykM/NLP6 - Відповідальний Максим Орлянський
+- **Other**  
+  **Metadata filtering**: N/A  
 
-**Задеплоєний сервіс** - .... - Відповідальний Максим Орлянський
+---
 
-** Запитання, де краще BM25 ніж Dense** - 
-What is doi number of Comprehensive Performance Evaluation between Visual SLAM and LiDAR SLAM for Mobile Robots: Theories and Experiments ?
-> Correct answer: 10.3390/app14093945
+## **Учасники проєкту**  
+- **Максим Орлянський**: Відповідальний за інтеграцію extracting data from pdf, LLM, Hybrid-Full retriever, UI.  
+- **Френіс Володимир**: Відповідальний за Sparse BM25, Dense retriever, Reranker, Citations.  
 
-**Запитання, де краще Dense ніж BM25** - 
-When was released article from reference 90 and what its called for article Visual-SLAM Classical Framework and Key Techniques: A Review  ?
-> Correct answer: 2010, Monocular Vision SLAM based on Key Feature Points Selection.
+---
+
+## **Посилання на запущений сервіс**  
+Сервіс запущений на платформі, де доступний GPU. Без GPU очікування відповідей для Semantic або Full може бути тривалим.  
+Для прикладу, сервіс можна запустити на платформі Google Colab: [Посилання на ноутбук](https://colab.research.google.com/drive/1QTObqmkQXHXuOmaWk2QHt4ofHPKboz_D?usp=sharing). 
+Для першого запуску, враховуючи встановлення залежностей, потрібно до 10 хвилин. 
