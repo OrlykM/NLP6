@@ -16,7 +16,7 @@ nltk.download('omw-1.4')
 nltk.download('averaged_perceptron_tagger_eng')
 
 reranker = FlagReranker('BAAI/bge-reranker-large', use_fp16=True)
-model = SentenceTransformer('intfloat/e5-large-v2')
+model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 print(f"The model is running on: {model.device}")
 
