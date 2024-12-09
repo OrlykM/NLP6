@@ -49,17 +49,19 @@ class Assistant:
             stream=True,
         )
 
-        generated_text = "".join(
-            str(chunk["choices"][0]["delta"]["content"]) for chunk in response
-        )
+        generated_text = ""
+        for chunk in response:
+            generated_text += str(chunk["choices"][0]['delta']['content'])
 
         result = []
-        for j, chunk_idx in enumerate(meta_rag["chunks_idx"]):
-            file = meta_rag["references"][j]
-            file_data = self.data[self.data["name"] == file]
-            chunks_count = len(file_data["chunks"].iloc[0])
-            result.append(
-                f"PDF: {file} | Chunk num: {chunk_idx} of {chunks_count}\n"
-            )
+        for j, chunk_idx in enumerate(meta_rag['chunks_idx']):
+            file = meta_rag['references'][j][0]
+            link = meta_rag['references'][j][1]
+            
+            l = self.data[self.data["name"] == file]
+            a = l["chunks"]
+            tmp = f"PDF: {file} \t| Link: {link} \t | Chunk num: {str(chunk_idx)} of {len(a.iloc[0])}\n"
+            
+            result.append(tmp)
+        return generated_text, result
 
-        return generated_text[:-4], result
