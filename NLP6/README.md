@@ -94,12 +94,6 @@
 Для прикладу, сервіс можна запустити на платформі Google Colab: [Посилання на ноутбук](https://colab.research.google.com/drive/1QTObqmkQXHXuOmaWk2QHt4ofHPKboz_D?usp=sharing). 
 Для першого запуску, враховуючи встановлення залежностей, потрібно до 10 хвилин. 
 
----
-
-## **Source code**  
-Доступний за посиланням: [GitHub - NLP6](https://github.com/OrlykM/NLP6).
-
-
 
 ---
 #### 1. Опис обраної тематики для кої розроблялась RAG система
