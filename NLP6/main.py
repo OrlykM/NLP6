@@ -16,17 +16,17 @@ nltk.download('omw-1.4')
 nltk.download('averaged_perceptron_tagger_eng')
 
 reranker = FlagReranker('BAAI/bge-reranker-large', use_fp16=True)
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2') #
+model = SentenceTransformer('intfloat/e5-large-v2')
 
 print(f"The model is running on: {model.device}")
 
 def main(args):
-    pdf_path = args.pdf_path
+    path = args.path
     faiss_index_path = args.faiss_index_path
     use_pdf = args.use_pdf
 
 
-    pdf_data = DataPdf(pdf_path)
+    pdf_data = DataPdf(path)
     pdf_embedding = Embedding(model)
 
     if use_pdf:
@@ -44,14 +44,13 @@ def main(args):
     )
     assistant = Assistant(text_retriever, pdf_data.data)
 
-    # Launch UI
     ui = create_ui(assistant.generate_answer)
     ui.launch(share=True)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the Assistant with PDF and FAISS index.")
     parser.add_argument(
-        "--pdf_path",
+        "--path",
         type=str,
         default="./data/odometry_data.csv",
         help="Path to the PDF or CSV data file."
@@ -64,7 +63,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--use_pdf",
-        action="store_false",
+        action='store_true',
         help="Generate embeddings from the PDF data instead of loading an existing FAISS index."
     )
     args = parser.parse_args()
