@@ -11,7 +11,7 @@ def generate_answer_gradio(api_key, query, method, rerank, assistant_generate_an
     if not api_key:
         return "No API key provided.", ""
     resp1, resp2 = assistant_generate_answer(api_key, query, method, rerank)
-    return resp1, " ".join(i for i in resp2)
+    return resp1[:-4], " ".join(i for i in resp2)
 
 
 def populate_query(example):
