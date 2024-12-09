@@ -10,7 +10,7 @@ class TextRetriever:
         self.chunk_references = chunk_references
         self.reranker = reranker_model  
 
-    def retrieve_with_bm25(self, query, top_n=3):
+    def retrieve_with_bm25(self, query, top_n=4):
         tokenized_chunks = [chunk[1].split() for chunk in self.chunks]  
         self.bm25 = BM25Okapi(tokenized_chunks)
         tokenized_query = query.split()  
@@ -25,7 +25,7 @@ class TextRetriever:
         }
         return result
         
-    def retrieve_with_semantic(self, query, top_n=3, rerank=True):
+    def retrieve_with_semantic(self, query, top_n=4, rerank=True):
         query_embedding = self.model.encode([query], normalize_embeddings=True)  
         D, I = self.index.search(query_embedding, k=40)  
     
@@ -63,7 +63,7 @@ class TextRetriever:
         }
         return result
 
-    def retrieve_full_search(self, query, top_n=3, rerank=True):
+    def retrieve_full_search(self, query, top_n=4, rerank=True):
         semantic_results = self.retrieve_with_semantic(query, top_n)
         bm25_results = self.retrieve_with_bm25(query, top_n)
 
