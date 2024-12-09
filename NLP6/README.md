@@ -65,9 +65,9 @@
 
 - **Retriever**  
   Розроблено три методи:  
-  1. **BM25** — повертає 3 релевантні документи.  
+  1. **BM25** — повертає 4 релевантні документи.  
   2. **Semantic** (на основі **intfloat/e5-large-v2**) — повертає 40 найбільш релевантних документів.  
-  3. **FULL search** — комбінує BM25, Semantic + Reranker. Після об’єднання 6 документів (3 від BM25, 3 від Semantic + Reranker), Reranker обирає 3 з них.  
+  3. **FULL search** — комбінує BM25, Semantic + Reranker. Після об’єднання 8 документів (4 від BM25, 4 від Semantic + Reranker), Reranker обирає 4 з них.  
 
 - **Reranker**  
   Використано модель **BAAI/bge-reranker-large**.  
