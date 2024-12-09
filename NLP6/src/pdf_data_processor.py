@@ -69,10 +69,12 @@ class DataPdf:
         """Flatten chunks into a list and associate them with their references."""
         self.chunks.clear()
         self.chunk_references.clear()
+
         for _, row in self.data.iterrows():
-            for i, chunk in enumerate(row["chunks"]):
+            for i, chunk in enumerate(row['chunks']):
                 self.chunks.append((i, chunk))
-                self.chunk_references.append(row["name"])
+                self.chunk_references.append((row['name'], row['link']))
+
 
     def save_to_csv(self, file_path):
         """Save the processed data to a CSV file."""
