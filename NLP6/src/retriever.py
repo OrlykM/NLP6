@@ -93,7 +93,7 @@ class TextRetriever:
         )
         
         filtered_results = [
-            item for item in reranked_results[:top_n] if item[1] > -5
+            item for item in reranked_results[:top_n] if item[1] > -10
         ]
 
         result = {
