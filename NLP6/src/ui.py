@@ -35,7 +35,7 @@ def create_ui(assistant_generate_answer):
         )
         
         example_queries = ["What is doi number of \"Comprehensive Performance Evaluation between Visual SLAM and LiDAR SLAM for Mobile Robots: Theories and Experiments\" ?",
-                           "How many and who are the authors of the article \"LIO-SAM: Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping\"", "According to the article \"Direct Sparse Odometry\" when Vladlen Koltun received his PhD",
+                           "How many and who are the authors of the article \"LIO-SAM: Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping\"",
                            "Write me something about SLAM and VSLAM. Write a difference between it", "Abbreviations in the article \" An Overview on Visual SLAM: From Tradition to Semantic\""]
         example_buttons = [
             gr.Button(example, size="sm") for example in example_queries
